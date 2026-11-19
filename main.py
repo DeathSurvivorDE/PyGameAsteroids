@@ -14,6 +14,8 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    game_score = 0
+
     # Group Definitions
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
@@ -53,14 +55,16 @@ def main():
             if player1.collides_with(asteroidTmp):
                 log_event("player_hit")
                 print("Game Over!")
+                print(f"You scored: {game_score:.1f}Points.\nCongratulation!")
                 sys.exit()
 
             for shotTmp in shots:
                 if asteroidTmp.collides_with(shotTmp):
                     #log_event("asteroid_shot")
-                    asteroidTmp.split()
+                    game_score += asteroidTmp.split()
                     shotTmp.kill()
 
+        game_score += dt
         dt = clock.tick(60) / 1000
         pygame.display.flip()
 
