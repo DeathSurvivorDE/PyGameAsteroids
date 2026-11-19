@@ -57,8 +57,8 @@ def main():
 
             for shotTmp in shots:
                 if asteroidTmp.collides_with(shotTmp):
-                    log_event("asteroid_shot")
-                    asteroidTmp.kill()
+                    #log_event("asteroid_shot")
+                    asteroidTmp.split()
                     shotTmp.kill()
 
         dt = clock.tick(60) / 1000
