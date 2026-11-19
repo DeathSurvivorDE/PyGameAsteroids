@@ -52,17 +52,23 @@ def main():
             drawableTmp.draw(screen)
 
         for asteroidTmp in asteroids:
-            if player1.collides_with(asteroidTmp):
+            if player1.collides_with(asteroidTmp) <= 0:
                 log_event("player_hit")
                 print("Game Over!")
                 print(f"You scored: {game_score:.1f}Points.\nCongratulation!")
                 sys.exit()
 
             for shotTmp in shots:
-                if asteroidTmp.collides_with(shotTmp):
+                if asteroidTmp.collides_with(shotTmp)<= 0:
                     #log_event("asteroid_shot")
                     game_score += asteroidTmp.split()
                     shotTmp.kill()
+
+            for asteroidTmp2 in asteroids:
+                if (asteroidTmp != asteroidTmp2 and
+                     asteroidTmp.collides_with(asteroidTmp2) <= 0 and asteroidTmp.collides_with(asteroidTmp2) > -10 and
+                     asteroidTmp.collision <= 0 and
+                     asteroidTmp2.collision <= 0): asteroidTmp.impact(asteroidTmp2)
 
         game_score += dt
         dt = clock.tick(60) / 1000
